@@ -1,0 +1,2 @@
+export const musicEvents = "https://app.ticketmaster.com/discovery/v2/events?countryCode=FI&classificationId=KZFzniwnSyZfZ7v7nJ&apikey=0JIWxBrWrDwCSXZzhD9HKwPngGfGc9fq"
+export const musicGenres = "https://app.ticketmaster.com/discovery/v2/classifications/segments/KZFzniwnSyZfZ7v7nJ?apikey=0JIWxBrWrDwCSXZzhD9HKwPngGfGc9fq"

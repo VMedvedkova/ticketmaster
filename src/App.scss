@@ -1,0 +1,484 @@
+@import "./utils/styleConsts";
+
+@mixin for_phones {
+  @media (max-width: 599px) { @content; }
+}
+@mixin for_tablets {
+  @media (max-width: 719px) { @content; }
+}
+@mixin for_small_desktop_and_tablets_portrait_mode {
+  @media (max-width: 1023px) { @content; }
+}
+@mixin for_desktop {
+  @media (max-width: 1199px) { @content; }
+}
+@mixin for_big_desktop {
+  @media (min-width: 1440px) { @content; }
+}
+@mixin for_touchscreen {
+  @media(hover: hover) and (pointer: fine){ @content; }
+}
+
+body {
+  font-family: $font-family;
+  overflow-y:scroll;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.App {
+  min-height: 100vh; 
+  background-color: $color__primary;
+}
+
+h1 {
+  font-size: $font__big;
+  font-style: normal;
+  font-weight: $font-weight__normal;
+  line-height: 120%;
+  
+  @include for_tablets() { 
+    font-size: $font__medium;
+  } 
+}
+
+h2 {
+  font-size: $font__medium;
+  font-style: normal;
+  font-weight: $font-weight__bold;
+  line-height: 125%;
+  margin: 0;
+  
+  @include for_small_desktop_and_tablets_portrait_mode() { 
+    font-size: 28px;
+  } 
+}
+
+.header {
+  color: $color__white;
+  padding: $medium $medium $small;
+
+  & .container{
+    position: relative;
+  
+    @include for_big_desktop {
+      width: 1440px - 2 * $medium;
+      margin: 0 auto;
+    } 
+  }
+
+  &__container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: flex-end;
+    align-items: flex-end;
+    margin: 0 auto;
+    box-sizing: border-box; 
+    
+    @include for_big_desktop {
+      width: 1440px - 2 * $medium;
+    }  
+
+    @include for_phones {
+      display: block;
+    }
+
+    &__logo {
+      color: var(--text, $color__white);
+      margin: 0;
+      
+      @include for_phones {
+        display: block;
+        margin: 0 auto $small;
+        text-align: center;
+      }
+    }
+
+    &__search-from {
+      width: 336px;
+      flex-shrink: 0;
+      padding: 0;  
+      background-color: $color__white;
+      box-sizing: border-box;
+      padding: 0;
+      position: relative;
+      
+      @include for_small_desktop_and_tablets_portrait_mode {
+          width: 270px;
+      }
+      
+      @include for_phones {
+        display: block;
+        margin: 0 auto;
+      }
+
+      &__input {
+        border: none;
+        width: 100%;
+        font-size: $font__xsmall;
+        font-style: normal;
+        font-weight: $font-weight__normal;
+        line-height: 150%;
+        padding: 8px 40px 8px 44px;
+        box-sizing: border-box;
+      }
+
+      &__input::placeholder{
+        opacity: 0.7
+      }
+      
+      &__input:focus{
+        background-color: rgba(254, 192, 23, 0.5);
+      }
+
+      &__search-icon {
+        position: absolute;
+        width: 16px;
+        top: 12px;
+        left: 16px;
+      } 
+
+      &__close-icon {
+        position: absolute;
+        width: 16px;
+        top: 12px;
+        right: 12px;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.5
+        }
+      } 
+    }
+  }
+
+  &__navbar {
+
+    & ul {
+      margin: $big 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-end;
+      gap: $small;
+      flex-wrap: wrap;
+      
+      @include for_small_desktop_and_tablets_portrait_mode {
+        gap: $xsmall;
+      }
+
+      @include for_phones {
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 10px;
+        margin: $small 0 0;
+      }
+    }
+    
+      &__item {
+        font-size: $font__small;
+        font-style: normal;
+        font-weight: $font-weight__normal;
+        line-height: 120%;
+        transition: all 300ms ease;
+        cursor: pointer;
+        color:  rgba(255, 255, 255, 0.7);
+        
+        @include for_small_desktop_and_tablets_portrait_mode { 
+          font-size: $font__xxsmall;
+        } 
+
+        @include for_phones {
+          font-size: $font__xsmall;
+        }
+
+        &:hover {  
+          @include for_touchscreen {
+            color: var(--link-active, $color__contrast);
+          } 
+        }
+
+        &__active { 
+          color: var(--link-active, $color__contrast);
+        }
+      }
+    }
+  }
+
+.main-layout {  
+  background-color: $color__white;
+  padding: ($medium - 8px);
+
+  &__container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  
+      @include for_big_desktop {
+        position: relative;
+        width: 1440px - 2 * $small;
+        margin: 0 auto;
+      } 
+    }
+
+  & .card {
+    display: block;
+    width: 25%;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: all 0ms ease;
+    transition-delay: 200ms;
+    
+  
+    @include for_desktop {
+      width: 33.3%;
+    } 
+
+    @include for_small_desktop_and_tablets_portrait_mode {
+      width: 50%;
+    } 
+    
+    @include for_phones {      
+      width: 100%;
+    } 
+
+    & .modal {
+      display: block;
+      width: 100%;
+      color: $color__white;
+      padding: $xsmall 0 8px;
+      position: absolute;
+      top: auto;
+      left: 0;
+      z-index: 100;
+      box-sizing: border-box;
+      
+      @include for_big_desktop {
+        padding-left: 8px;
+        padding-right: 8px;
+      } 
+
+     
+      &__content {
+        background-color: $color__primary;
+        padding: $medium;
+        height: auto; 
+        position: relative;
+        z-index: 1;
+        
+        &::before {
+          content: "";
+          background:linear-gradient(to right, ($color__primary), transparent); 
+          position: absolute;
+          top: 0%;
+          left: 49.9%;
+          width: 10%;
+          height: 100%;
+          z-index: 1;   
+        }   
+  
+        &::after {
+          content: "";
+          background-color: $color__primary;
+          position: absolute;
+          top: 0%;
+          left: 0%;
+          width: 50%;
+          height: 100%;
+          z-index: 1; 
+        }   
+  
+        &__body {
+          width: 45%;
+          padding-right: 20%;
+          z-index: 2;
+          position: relative;   
+            
+          @include for_small_desktop_and_tablets_portrait_mode {
+            padding-top: $medium;
+            padding-right: 0;
+            width: 100%;
+            box-sizing: border-box;
+          }           
+
+          @include for_phones {
+            padding-top: 0;
+          }
+        }   
+  
+        &__body__info-table {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 8px;
+          margin: $xsmall 0;
+      }
+
+        &__image-holder {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50%;
+          height: 100%;
+          z-index: 0;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat; 
+          
+          &::after {
+            content: "";   
+            background-color: rgba(37, 43, 64, 0.08);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;         
+    
+            @include for_small_desktop_and_tablets_portrait_mode {
+              opacity: 0
+            } 
+          }   
+
+          @include for_small_desktop_and_tablets_portrait_mode {
+            position: relative;
+            width: 100%;
+            height: 370px;
+            z-index: 2;
+        }
+
+          @include for_phones {
+            display: none
+        }
+      }
+    
+      }
+  
+      &__body__info-table__row {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 10px;
+        font-size: $font__xsmall;
+        font-style: normal;
+        font-weight: $font-weight__normal;
+        line-height: 150% 
+  
+      }
+  
+      &__content__body__txt {
+        margin-bottom: 48px;
+          
+        @include for_small_desktop_and_tablets_portrait_mode {
+          margin-bottom: $small;
+        } 
+      }
+    }
+  
+    & .img {
+      display: block;
+      width: 100%;
+      height: 0;
+      padding-bottom: 66%;
+      background-size: cover;
+      background-position: center;
+      position: relative; 
+      cursor: pointer;
+
+      &::after {
+              content: "";
+              position: absolute;
+              top: 0%;
+              left: 0%;
+              width: 100%;
+              height: 100%;
+              background-color: #fff;
+              opacity: 0;             
+              transition: all 200ms ease;
+            } 
+            
+            &:hover::after {
+                opacity: 0.3
+              }
+    }
+
+    &__open .img::before {
+      content: "";
+      border-bottom: solid $color__primary $xsmall;
+      border-top: 0px;
+      border-left: solid transparent $xsmall;
+      border-right: solid transparent $xsmall;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -$xsmall;
+      margin-top: 4px;
+      width: 0;
+      height: 0;
+    }
+    
+    &__open {
+      transition: all 200ms ease;
+      transition-delay: 0ms;
+
+      & .img::after {
+        opacity: 0.3
+      }      
+    }
+
+    &__empty {
+      width: 100%;
+      padding: $medium;
+      background: $color__contrast;
+      font-size: $font__small;
+      font-style: normal;
+      font-weight: $font-weight__normal;
+      line-height: 120%;
+      margin-bottom: 25vh;
+    }
+  } 
+}
+
+.button {
+  display: inline-block;
+  padding: 8px $small;
+  border: 1px solid var(--text, $color__white);
+  font-size: $font__xsmall;
+  font-style: normal;
+  font-weight: $font-weight__normal;
+  line-height: 150%;     
+  cursor: pointer;
+}
+
+.footer {  
+  &__container {
+    color: $color__white;
+    padding: $xsmall;
+    text-align: center;
+    font-size: $font__small;
+    font-style: normal;
+    font-weight: $font-weight__normal;
+    line-height: 150%;
+    opacity: 0.7;
+  }
+}
